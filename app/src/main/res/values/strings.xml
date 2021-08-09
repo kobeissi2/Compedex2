@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Compédex</string>
+    <string name="failed_to_load">Failed to load</string>
+    <string name="internet_required">Internet is required for the app to function properly.</string>
+    <string name="try_again">Please try again later or swipe down to retry</string>
+    <string name="species">Species</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="abilities">Abilities</string>
+    <string name="forms">Forms</string>
+    <string name="base_happiness">Base Happiness</string>
+    <string name="capture_rate">Capture Rate</string>
+    <string name="color">Color</string>
+    <string name="egg_group">Egg Group</string>
+    <string name="growth_rate">Growth Rate</string>
+    <string name="hatch_counter">Hatch Counter</string>
+    <string name="total">Total</string>
+    <string name="gender">Gender</string>
+    <string name="filter">Filter</string>
+    <string name="hidden_ability">Hidden Ability</string>
+    <string name="search_label">Go to Pokemon</string>
+</resources>

@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "renovateFork": true,
+  "automerge": true,
+  "major": {
+    "automerge": false
+  }
+}
