@@ -18,12 +18,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.ExperimentalPagingApi
 import coil.compose.rememberImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.kobeissidev.jetpackcomposepokedex.R
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
 
+@ExperimentalPagingApi
 @Composable
 fun ErrorLayout(
     viewModel: MainViewModel = hiltViewModel(),
@@ -43,9 +45,7 @@ fun ErrorLayout(
             )
         }
     ) {
-        val modifier = Modifier
-            .fillMaxSize()
-            .padding(all = 32.dp)
+        val modifier = Modifier.fillMaxSize()
 
         when (orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> PokemonErrorLandscapeSection(
