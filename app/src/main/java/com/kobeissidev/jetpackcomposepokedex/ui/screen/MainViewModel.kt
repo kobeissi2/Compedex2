@@ -30,8 +30,8 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
+            delay(500)
             repository.remoteMediator.initialize()
-            delay(1000)
         }
     }
 
