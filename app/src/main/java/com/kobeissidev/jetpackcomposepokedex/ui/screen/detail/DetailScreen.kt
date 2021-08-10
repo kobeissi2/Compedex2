@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.ExperimentalPagingApi
 import coil.annotation.ExperimentalCoilApi
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.kobeissidev.jetpackcomposepokedex.data.model.pokemon.Pokemon
@@ -25,6 +25,7 @@ import timber.log.Timber
 /**
  * Specific Pokemon Detail screen.
  */
+@ExperimentalPagingApi
 @ExperimentalCoroutinesApi
 @ExperimentalCoilApi
 @ExperimentalPagerApi
@@ -70,7 +71,10 @@ private fun DetailPortraitSection(
             .fillMaxSize()
             .background(color = pokemon.primaryPalette.backgroundColor.asComposeColor)
     ) {
-        DetailHeaderSection(pokemon, palette)
+        DetailHeaderSection(
+            pokemon = pokemon,
+            palette = palette
+        )
         ArtworkSection(pokemon = pokemon)
         InfoCard(
             pokemon = pokemon,
@@ -96,7 +100,10 @@ private fun DetailLandscapeSection(
                 .fillMaxWidth(0.5f)
                 .padding(all = 16.dp)
         ) {
-            DetailHeaderSection(pokemon, palette)
+            DetailHeaderSection(
+                pokemon = pokemon,
+                palette = palette
+            )
             ArtworkSection(pokemon = pokemon)
         }
         Column(modifier = Modifier.fillMaxWidth()) {
