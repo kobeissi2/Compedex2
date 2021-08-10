@@ -56,8 +56,8 @@ Landscape:
 
 #### Known Bugs/Issues:
  <ol>
-    <li>Inital load might take a while.</li>
-    <li>Loading screen might chug along randomly.</li>
+    <li>Inital load might take up to 30 seconds.</li>
+    <li>Loading screen progress bar might chug along randomly.</li>
     <li>There are times where the LazyVerticalGrid + Pager combo jump to the second page and don't render the first page unless you scroll.</li>
     <li>Some Pokemon information might be wrong or missing (Gen 8) but that is from the API. I did fix some of them but it required hardcoding.</li>
 </ol>
