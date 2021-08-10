@@ -18,6 +18,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.paging.ExperimentalPagingApi
 import com.kobeissidev.jetpackcomposepokedex.R
 import com.kobeissidev.jetpackcomposepokedex.data.model.pokemon.Pokemon
 import com.kobeissidev.jetpackcomposepokedex.ui.composable.autocomplete.AutoCompleteBox
@@ -28,6 +29,7 @@ import com.kobeissidev.jetpackcomposepokedex.util.EmptyString
 import com.kobeissidev.jetpackcomposepokedex.util.TAG
 import kotlinx.coroutines.launch
 
+@ExperimentalPagingApi
 @ExperimentalAnimationApi
 @Composable
 fun SearchLayout(

@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.ExperimentalPagingApi
 import coil.compose.rememberImagePainter
 import com.kobeissidev.jetpackcomposepokedex.R
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
@@ -20,6 +21,7 @@ import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
  * @param orientation is used to update the size of the image depending on the orientation.
  * @param isShowImage will show the logo if true.
  */
+@ExperimentalPagingApi
 @Composable
 fun LoadingLayout(
     isShowImage: Boolean = false,

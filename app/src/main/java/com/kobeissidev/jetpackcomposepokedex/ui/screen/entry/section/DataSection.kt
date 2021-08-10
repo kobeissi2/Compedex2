@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.compose.LazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -39,6 +40,7 @@ import com.kobeissidev.jetpackcomposepokedex.util.items
  * @param listState contains our scroll state.
  * @param isError checks if the state of the paging library has an error.
  */
+@ExperimentalPagingApi
 @ExperimentalAnimationApi
 @ExperimentalCoilApi
 @ExperimentalMaterialApi

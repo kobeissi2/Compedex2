@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.paging.ExperimentalPagingApi
 import coil.annotation.ExperimentalCoilApi
 import com.kobeissidev.jetpackcomposepokedex.data.model.pokemon.Pokemon
 import com.kobeissidev.jetpackcomposepokedex.data.model.supplementary.Palette
@@ -32,6 +33,7 @@ import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
  * @param isError checks if the state of the paging library has an error.
  * @param palette contains our palette colors for the UI.
  */
+@ExperimentalPagingApi
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable

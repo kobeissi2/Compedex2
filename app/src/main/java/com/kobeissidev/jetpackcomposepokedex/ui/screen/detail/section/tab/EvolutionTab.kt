@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.ExperimentalPagingApi
 import coil.annotation.ExperimentalCoilApi
 import com.kobeissidev.jetpackcomposepokedex.data.model.supplementary.MappedEvolution
 import com.kobeissidev.jetpackcomposepokedex.data.model.supplementary.Palette
@@ -27,6 +28,7 @@ import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
 import com.kobeissidev.jetpackcomposepokedex.util.onStateChanged
 import timber.log.Timber
 
+@ExperimentalPagingApi
 @ExperimentalCoilApi
 @Composable
 fun EvolutionTab(

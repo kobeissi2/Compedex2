@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.compose.LazyPagingItems
 import com.kobeissidev.jetpackcomposepokedex.R
 import com.kobeissidev.jetpackcomposepokedex.data.model.pokemon.Pokemon
@@ -23,6 +24,7 @@ import com.kobeissidev.jetpackcomposepokedex.ui.composable.SearchLayout
 /**
  * Header for the entry screen which contains the title and the search bar.
  */
+@ExperimentalPagingApi
 @ExperimentalAnimationApi
 @Composable
 internal fun EntryHeaderSection(
