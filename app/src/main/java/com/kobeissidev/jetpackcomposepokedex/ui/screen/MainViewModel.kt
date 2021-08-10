@@ -35,15 +35,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun init(lazyPagingItems: LazyPagingItems<Pokemon>) {
-        if (isFirstLaunch) {
-            viewModelScope.launch(Dispatchers.IO) {
-                delay(1000)
-                lazyPagingItems.refresh()
-            }
-        }
-    }
-
     /**
      * Expose the Pokemon Paging Flow to the View
      */
@@ -110,4 +101,16 @@ class MainViewModel @Inject constructor(
      * Attempt to re-fetch the data if an internet connection if available.
      */
     fun refetchPokemon() = viewModelScope.launch { repository.refetchPokemon(getApplication()) }
+
+    /**
+     * Temp workaround to reduce amount of Paging 3 + LazyVerticalGrid bug.
+     */
+    fun init(lazyPagingItems: LazyPagingItems<Pokemon>) {
+        if (isFirstLaunch) {
+            viewModelScope.launch(Dispatchers.IO) {
+                delay(1000)
+                lazyPagingItems.refresh()
+            }
+        }
+    }
 }
