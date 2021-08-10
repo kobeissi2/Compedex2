@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.ExperimentalPagingApi
 import coil.annotation.ExperimentalCoilApi
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.kobeissidev.jetpackcomposepokedex.data.model.pokemon.Pokemon
@@ -24,6 +25,7 @@ import com.kobeissidev.jetpackcomposepokedex.ui.screen.detail.section.tab.*
 import com.kobeissidev.jetpackcomposepokedex.util.onStateChanged
 import timber.log.Timber
 
+@ExperimentalPagingApi
 @ExperimentalCoilApi
 @ExperimentalPagerApi
 @Composable

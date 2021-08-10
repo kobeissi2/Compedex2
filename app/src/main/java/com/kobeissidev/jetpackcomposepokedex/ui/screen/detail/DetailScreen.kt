@@ -59,6 +59,7 @@ fun DetailScreen(viewModel: MainViewModel = hiltViewModel()) {
     }
 }
 
+@ExperimentalPagingApi
 @ExperimentalPagerApi
 @ExperimentalCoilApi
 @Composable
@@ -83,6 +84,7 @@ private fun DetailPortraitSection(
     }
 }
 
+@ExperimentalPagingApi
 @ExperimentalPagerApi
 @ExperimentalCoilApi
 @Composable

@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.ExperimentalPagingApi
 import com.kobeissidev.jetpackcomposepokedex.R
 import com.kobeissidev.jetpackcomposepokedex.data.model.pokemon.Pokemon
 import com.kobeissidev.jetpackcomposepokedex.data.model.species.Species
@@ -32,6 +33,7 @@ import com.kobeissidev.jetpackcomposepokedex.util.onStateChanged
 import com.kobeissidev.jetpackcomposepokedex.util.removeDash
 import timber.log.Timber
 
+@ExperimentalPagingApi
 @Composable
 internal fun AboutTab(
     pokemon: Pokemon,
@@ -121,12 +123,8 @@ internal fun AboutTab(
                 )
 
             },
-            onLoading = {
-                LoadingLayout()
-            },
-            onFailure = { message ->
-                Timber.e(message)
-            }
+            onLoading = { LoadingLayout() },
+            onFailure = { message -> Timber.e(message) }
         )
     }
 }
