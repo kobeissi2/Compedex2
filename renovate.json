@@ -6,6 +6,7 @@
     ":automergeAll",
     ":disableRateLimiting",
     ":label(<renovate>)",
-    ":enableVulnerabilityAlertsWithLabel(<renovate>)"
+    ":enableVulnerabilityAlertsWithLabel(<renovate>)",
+    "group:all"
   ]
 }
