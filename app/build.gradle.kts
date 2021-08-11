@@ -97,7 +97,7 @@ dependencies {
     // Color extraction from image
     implementation("androidx.palette:palette-ktx:1.0.0")
     // Logging
-    implementation("com.jakewharton.timber:timber:4.7.1")
+    implementation("com.jakewharton.timber:timber:5.0.0")
 
     testImplementation("junit:junit:4.13.2")
 
