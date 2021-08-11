@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,6 +20,7 @@ import com.kobeissidev.jetpackcomposepokedex.ui.composable.LoadingLayout
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.entry.section.DataSection
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 
 /**
  * Main section of the app. Displays all of the Pokemon Entries.
@@ -38,35 +39,39 @@ fun EntriesScreen(
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val lazyPokemonEntries = viewModel.pokemonPagingFlow.collectAsLazyPagingItems()
+    val errorState by viewModel.isError.collectAsState()
     val isListEmpty = lazyPokemonEntries.itemCount == 0
-    val states = listOf(
-        lazyPokemonEntries.loadState.refresh,
-        lazyPokemonEntries.loadState.append,
-        lazyPokemonEntries.loadState.prepend
-    )
-    val isLoading = states.any { it is LoadState.Loading }
-    val isError = states.any { it is LoadState.Error }
+    val isLoading = lazyPokemonEntries.loadState.refresh is LoadState.Loading
+    val isError = (lazyPokemonEntries.loadState.refresh is LoadState.Error || errorState) && isListEmpty
+    var isReady by remember { mutableStateOf(false) }
 
-    viewModel.init(lazyPokemonEntries)
+    // Prevents LazyPagingItems from loading in too quickly which randomly triggers the first page not to load properly.
+    LaunchedEffect(key1 = isError) {
+        delay(1000)
+        isReady = !isError
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(all = 16.dp)
     ) {
-        if (isLoading || isListEmpty || viewModel.isFirstLaunch) {
-            LoadingLayout(isShowImage = isListEmpty || viewModel.isFirstLaunch)
-            viewModel.isFirstLaunch = false
+        if (isLoading || isError) {
+            LoadingLayout(isShowImage = isListEmpty && !isError)
         }
         when {
             isListEmpty && isError -> {
                 LoadingLayout(isShowImage = false)
-                ErrorLayout(onRefresh = { lazyPokemonEntries.retry() })
+                ErrorLayout(onRefresh = { viewModel.onErrorRetry(lazyPokemonEntries) })
             }
-            !isListEmpty -> DataSection(
-                lazyPokemonEntries = lazyPokemonEntries,
-                navHostController = navHostController
-            )
+            !isListEmpty -> {
+                if (isReady) {
+                    DataSection(
+                        lazyPokemonEntries = lazyPokemonEntries,
+                        navHostController = navHostController
+                    )
+                } else lazyPokemonEntries.refresh()
+            }
         }
     }
 }

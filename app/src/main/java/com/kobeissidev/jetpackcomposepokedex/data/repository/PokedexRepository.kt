@@ -2,8 +2,8 @@ package com.kobeissidev.jetpackcomposepokedex.data.repository
 
 import android.app.Application
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
+import android.content.SharedPreferences
+import androidx.core.graphics.drawable.toBitmap
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.io.ByteArrayOutputStream
 import com.kobeissidev.jetpackcomposepokedex.data.model.supplementary.Palette as CustomPalette
 
 @ActivityScoped
@@ -36,14 +35,9 @@ class PokedexRepository(
     private val database: PokeDatabase,
     private val application: Application,
     private val imageLoader: ImageLoader,
+    private val sharedPreferences: SharedPreferences,
     val imageRequestList: MutableList<Disposable> = mutableListOf()
 ) {
-
-    @ExperimentalPagingApi
-    val remoteMediator = PokemonRemoteMediator(
-        apiService = apiService,
-        database = database
-    )
 
     /**
      * Get the flow that is built using the Paging 3 Library.
@@ -56,7 +50,11 @@ class PokedexRepository(
                 prefetchDistance = PageSize * 2,
                 jumpThreshold = JumpThreshold
             ),
-            remoteMediator = remoteMediator,
+            remoteMediator = PokemonRemoteMediator(
+                apiService = apiService,
+                database = database,
+                sharedPreferences = sharedPreferences
+            ),
             pagingSourceFactory = { database.pokedexDao().getAllPokemonEntries() }
         ).flow.map { pagingData ->
             withContext(Dispatchers.IO) {
@@ -182,19 +180,17 @@ class PokedexRepository(
         } else {
             val request = ImageRequest.Builder(application)
                 .data(pokemon.spriteUrl)
+                .allowHardware(false)
                 .target { drawable ->
                     if (pokemon.primaryPalette.backgroundColor.isEmpty) {
-                        val bitmap = (drawable as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
+                        val bitmap = drawable.toBitmap()
                         Palette.from(bitmap).generate { palette ->
-                            val stream = ByteArrayOutputStream()
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
                             pokemon.paletteList = palette!!.swatches.map { swatch ->
                                 CustomPalette(
                                     name = pokemon.name,
                                     backgroundColor = Color.fromComposeColor(swatch.rgb),
                                     titleTextColor = Color.fromComposeColor(swatch.titleTextColor),
                                     bodyTextColor = Color.fromComposeColor(swatch.bodyTextColor),
-                                    drawableArray = stream.toByteArray(),
                                     isDefault = swatch == palette.dominantSwatch
                                 )
                             }

@@ -2,6 +2,7 @@ package com.kobeissidev.jetpackcomposepokedex.di
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import coil.ImageLoader
 import com.kobeissidev.jetpackcomposepokedex.data.local.PokeDatabase
 import com.kobeissidev.jetpackcomposepokedex.data.remote.PokeApiService
@@ -17,9 +18,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    private const val PreferencesName = "Prefs"
+
     @Singleton
     @Provides
     fun provideImageLoader(@ApplicationContext context: Context) = ImageLoader.Builder(context).build()
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(@ApplicationContext context: Context) =
+        context.getSharedPreferences(PreferencesName, Context.MODE_PRIVATE)
 
     @Singleton
     @Provides
@@ -27,6 +35,7 @@ object AppModule {
         pokeApiService: PokeApiService,
         pokeDatabase: PokeDatabase,
         application: Application,
-        imageLoader: ImageLoader
-    ) = PokedexRepository(pokeApiService, pokeDatabase, application, imageLoader)
+        imageLoader: ImageLoader,
+        sharedPreferences: SharedPreferences
+    ) = PokedexRepository(pokeApiService, pokeDatabase, application, imageLoader, sharedPreferences)
 }

@@ -13,7 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -97,11 +96,10 @@ fun PokemonCard(
                         fontWeight = FontWeight.SemiBold
                     )
                 )
-                // Don't bother rendering the image if we don't have data or are scrolling.
-                // Scrolling recomposes and triggers the image to recompose which doesn't look great.
-                if (pokemonPalette.drawableArray.isNotEmpty() && !isScrolling) {
+                // Don't bother rendering the image if we are scrolling.
+                if (!isScrolling) {
                     CrossFadeImage(
-                        data = pokemonPalette.getDrawable(LocalContext.current),
+                        data = pokemon.spriteUrl,
                         modifier = Modifier.fillMaxSize()
                     )
                 }

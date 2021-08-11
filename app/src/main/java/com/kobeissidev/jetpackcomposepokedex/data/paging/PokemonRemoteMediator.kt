@@ -1,5 +1,6 @@
 package com.kobeissidev.jetpackcomposepokedex.data.paging
 
+import android.content.SharedPreferences
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -19,13 +20,17 @@ import kotlinx.coroutines.withContext
 @ExperimentalPagingApi
 class PokemonRemoteMediator(
     private val apiService: PokeApiService,
-    val database: PokeDatabase
+    val database: PokeDatabase,
+    private val sharedPreferences: SharedPreferences
 ) : RemoteMediator<Int, PokemonEntry>() {
 
     /**
      * Update paginated content when this is initialized.
      */
-    override suspend fun initialize() = InitializeAction.SKIP_INITIAL_REFRESH
+    override suspend fun initialize() = if (sharedPreferences.getBoolean(FirstLaunch, true)) {
+        sharedPreferences.edit().putBoolean(FirstLaunch, false).apply()
+        InitializeAction.LAUNCH_INITIAL_REFRESH
+    } else InitializeAction.SKIP_INITIAL_REFRESH
 
     /**
      * Load the data
@@ -133,8 +138,7 @@ class PokemonRemoteMediator(
     private companion object {
         // API Limit on number of Pokemon Entries to fetch.
         const val Limit = 20
-
-        // Start from the first page.
         const val StartingPageIndex = 0
+        const val FirstLaunch = "FirstLaunch"
     }
 }

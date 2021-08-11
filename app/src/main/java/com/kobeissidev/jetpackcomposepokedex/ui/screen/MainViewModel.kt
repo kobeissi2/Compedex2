@@ -2,6 +2,7 @@ package com.kobeissidev.jetpackcomposepokedex.ui.screen
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,6 +11,7 @@ import androidx.paging.cachedIn
 import androidx.paging.compose.LazyPagingItems
 import com.kobeissidev.jetpackcomposepokedex.data.model.pokemon.Pokemon
 import com.kobeissidev.jetpackcomposepokedex.data.repository.PokedexRepository
+import com.kobeissidev.jetpackcomposepokedex.util.isOnline
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,21 +28,22 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: PokedexRepository,
-    @ApplicationContext context: Context,
+    private val sharedPreferences: SharedPreferences,
+    @ApplicationContext context: Context
 ) : AndroidViewModel(context as Application) {
-
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-            delay(500)
-            repository.remoteMediator.initialize()
-        }
-    }
 
     /**
      * Expose the Pokemon Paging Flow to the View
      */
     @ExperimentalPagingApi
-    val pokemonPagingFlow = repository.pokemonPagingFlow.cachedIn(viewModelScope).flowOn(Dispatchers.IO)
+    val pokemonPagingFlow = repository.pokemonPagingFlow
+        .cachedIn(viewModelScope)
+        .flowOn(Dispatchers.IO)
+        .onStart {
+            isError.emit(!context.isOnline.also { isError ->
+                if (isError) sharedPreferences.edit().clear().apply()
+            })
+        }
 
     /**
      * Flow for keeping track of the Pokemon fetch result.
@@ -72,9 +76,9 @@ class MainViewModel @Inject constructor(
     val isRefreshing = MutableStateFlow(false)
 
     /**
-     * Used for showing the loading image.
+     * State for if the layout is an error
      */
-    var isFirstLaunch = true
+    val isError = MutableStateFlow(false)
 
     /**
      * List of disposables of the ImageLoader.
@@ -103,14 +107,13 @@ class MainViewModel @Inject constructor(
     fun refetchPokemon() = viewModelScope.launch { repository.refetchPokemon(getApplication()) }
 
     /**
-     * Temp workaround to reduce amount of Paging 3 + LazyVerticalGrid bug.
+     * Reset the error flow on refresh at the error screen
      */
-    fun init(lazyPagingItems: LazyPagingItems<Pokemon>) {
-        if (isFirstLaunch) {
-            viewModelScope.launch(Dispatchers.IO) {
-                delay(1000)
-                lazyPagingItems.refresh()
-            }
+    fun onErrorRetry(lazyPokemonEntries: LazyPagingItems<Pokemon>) {
+        viewModelScope.launch {
+            delay(1000)
+            lazyPokemonEntries.retry()
+            isError.emit(!getApplication<Application>().isOnline)
         }
     }
 }
