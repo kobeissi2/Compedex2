@@ -90,7 +90,7 @@ dependencies {
     // Paging Compose
     implementation("androidx.paging:paging-compose:1.0.0-alpha12")
     // Swipe to Refresh
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.16.0")
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.16.1")
     // Pager for creating tabbed layout
     implementation("com.google.accompanist:accompanist-pager:0.16.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.16.0")
