@@ -71,7 +71,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.16.0")
     // Navigation in Compose
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha06")
-    implementation("com.google.accompanist:accompanist-navigation-animation:0.16.0")
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.16.1")
     // Used for image loading in Compose
     implementation("io.coil-kt:coil-compose:1.3.2")
     // Retrofit + Moshi
