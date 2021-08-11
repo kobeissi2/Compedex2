@@ -8,5 +8,6 @@
     ":label(<renovate>)",
     "group:all"
   ],
-  "ignoreDeps": ["com.android.tools.build:gradle"]
+  "ignoreDeps": ["com.android.tools.build:gradle"],
+  "includeForks": true
 }
