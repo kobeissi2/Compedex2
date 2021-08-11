@@ -93,7 +93,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-swiperefresh:0.16.0")
     // Pager for creating tabbed layout
     implementation("com.google.accompanist:accompanist-pager:0.16.0")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.16.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.16.1")
     // Color extraction from image
     implementation("androidx.palette:palette-ktx:1.0.0")
     // Logging
