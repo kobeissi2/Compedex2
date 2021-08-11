@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 @ExperimentalPagingApi
 class PokemonRemoteMediator(
     private val apiService: PokeApiService,
-    val database: PokeDatabase,
+    private val database: PokeDatabase,
     private val sharedPreferences: SharedPreferences
 ) : RemoteMediator<Int, PokemonEntry>() {
 
@@ -44,7 +44,6 @@ class PokemonRemoteMediator(
             is MediatorResult.Success -> return pageKeyData
             else -> pageKeyData as Int
         }
-
         return try {
             withContext(Dispatchers.IO) {
                 val response = getResult {
@@ -57,10 +56,8 @@ class PokemonRemoteMediator(
                     // Set the id to the page just so we can keep track of it.
                     id = page
                 }
-
                 // If the next entry is empty, we know we are at the end.
                 val isEndOfList = response.next.isNullOrBlank()
-
                 // Update the database with the response.
                 database.withTransaction {
                     // If a refresh is triggered, clear all data so we can get new data.
@@ -69,17 +66,14 @@ class PokemonRemoteMediator(
                         database.pokedexDao().deleteAllPokemon()
                         database.pokedexDao().deleteAllRemoteKeys()
                     }
-
                     // Create a remote key and keep track of the previous and next key.
                     val prevKey = if (page == StartingPageIndex) null else page - 1
                     val nextKey = if (isEndOfList) null else page + 1
                     val keys = RemoteKey(id = "${response.id}", prevKey = prevKey, nextKey = nextKey)
-
                     // Save the Pokemon entries and the remote keys in the database.
                     database.pokedexDao().insertAllRemoteKeys(keys)
                     database.pokedexDao().insertAllPokemonEntries(response)
                 }
-
                 MediatorResult.Success(endOfPaginationReached = isEndOfList)
             }
         } catch (exception: Exception) {
@@ -98,10 +92,8 @@ class PokemonRemoteMediator(
     ) = when (loadType) {
         // Returns the current key if not null otherwise return the starting page index.
         LoadType.REFRESH -> getRemoteKeyClosestToCurrentPosition(state)?.nextKey?.minus(1) ?: StartingPageIndex
-
         // Returns the next key if not null otherwise inform that we are at the end of the page.
         LoadType.APPEND -> getLastRemoteKey(state)?.nextKey ?: MediatorResult.Success(endOfPaginationReached = false)
-
         // Returns the previous key if not null otherwise inform that we are at the beginning of the page.
         LoadType.PREPEND -> getFirstRemoteKey(state)?.prevKey ?: MediatorResult.Success(endOfPaginationReached = false)
     }
