@@ -83,26 +83,27 @@ fun MovesTab(
                         ) {
                             AutoSizeText(
                                 modifier = Modifier
-                                    .fillMaxWidth(0.5f)
-                                    .alpha(0.5f),
+                                    .fillMaxWidth(fraction = 0.5f)
+                                    .alpha(alpha = .5f),
                                 text = move.move!!.name!!.removeDash,
                                 style = style
                             )
-                            Row(  modifier = Modifier.fillMaxWidth()) {
+                            Row(modifier = Modifier.fillMaxWidth()) {
                                 Spacer(modifier = Modifier.padding(horizontal = 4.dp))
                                 AutoSizeText(
-                                    modifier = Modifier.alpha(0.75f),
+                                    modifier = Modifier.alpha(alpha = 0.75f),
                                     text = detail.moveLearnMethod!!.name!!.removeDash,
                                     style = style
                                 )
-                                detail.levelToDisplay?.let { levelToDisplay->
-                                Spacer(modifier = Modifier.padding(horizontal = 4.dp))
-                                AutoSizeText(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    text = levelToDisplay,
-                                    style = style.copy(textAlign = TextAlign.End)
-                                )
-                            } }
+                                detail.levelToDisplay?.let { levelToDisplay ->
+                                    Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+                                    AutoSizeText(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        text = levelToDisplay,
+                                        style = style.copy(textAlign = TextAlign.End)
+                                    )
+                                }
+                            }
                         }
                     }
                 }

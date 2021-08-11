@@ -46,7 +46,7 @@ fun StatsTab(
         items(stats) { stat ->
             InfoRow(
                 modifier = Modifier
-                    .fillMaxWidth(0.25f)
+                    .fillMaxWidth(fraction = 0.25f)
                     .padding(vertical = 4.dp),
                 title = stat.nameShortened,
                 titleTextColor = titleTextColor,
@@ -59,7 +59,7 @@ fun StatsTab(
                 ) {
                     val baseStat = stat.baseStat!!
                     AutoSizeText(
-                        modifier = Modifier.fillMaxWidth(0.15f),
+                        modifier = Modifier.fillMaxWidth(fraction = 0.15f),
                         text = baseStat.toString(),
                         style = MaterialTheme.typography.body1.copy(
                             color = titleTextColor,

@@ -99,7 +99,7 @@ private fun DetailLandscapeSection(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth(0.5f)
+                .fillMaxWidth(fraction = 0.5f)
                 .padding(all = 16.dp)
         ) {
             DetailHeaderSection(

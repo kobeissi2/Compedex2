@@ -13,6 +13,7 @@ import com.kobeissidev.jetpackcomposepokedex.data.remote.PokeApiService
 import com.kobeissidev.jetpackcomposepokedex.util.getResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 /**
  * Mediates the Pokemon Entry data and adds them to the database as needed.
@@ -74,9 +75,11 @@ class PokemonRemoteMediator(
                     database.pokedexDao().insertAllRemoteKeys(keys)
                     database.pokedexDao().insertAllPokemonEntries(response)
                 }
+                Timber.d("Remote mediator exception successfull")
                 MediatorResult.Success(endOfPaginationReached = isEndOfList)
             }
         } catch (exception: Exception) {
+            Timber.e("Remote mediator exception thrown: $exception")
             MediatorResult.Error(exception)
         }
     }

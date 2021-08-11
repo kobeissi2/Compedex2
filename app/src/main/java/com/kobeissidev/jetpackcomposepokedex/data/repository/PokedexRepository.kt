@@ -103,12 +103,14 @@ class PokedexRepository(
      * Get the Pokemon using the Pokemon id
      */
     suspend fun fetchPokemon(pokemon: Pokemon) {
+        Timber.d("Fetching pokemon ${pokemon.name}")
         lastFailedFetchedPokemon = null
         // Set initial state to the Loading so the UI could show a loading screen if necessary.
         fetchingStatusFlow.emit(NetworkResult.Loading())
         // Mainly just checking the type locally since every Pokemon will contain one.
         database.pokedexDao().getPokemon(pokemon.id)?.let { databasePokemon ->
             if (!databasePokemon.types.isNullOrEmpty()) {
+                Timber.d("Pokemon ${pokemon.name} exists")
                 fetchingStatusFlow.emit(NetworkResult.Success(databasePokemon))
                 return
             }
@@ -116,6 +118,7 @@ class PokedexRepository(
         // Pokemon was not cached so fetch it.
         getResult { apiService.getPokemon(pokemon.id.toString()) }.suspendOnStateChanged(
             onSuccess = { networkPokemon ->
+                Timber.d("Successfully fetched ${pokemon.name} data")
                 // Fetched Pokemon successfully so update it in the database and emit the data to the flow
                 val fetchedPokemon = networkPokemon.copy(paletteList = pokemon.paletteList)
                 database.pokedexDao().updatePokemon(pokemon = fetchedPokemon)
@@ -128,6 +131,7 @@ class PokedexRepository(
                 // Suspend functions cannot be inlined and defaulted so we need to define it.
             },
             onFailure = { message ->
+                Timber.e("Failed fetching ${pokemon.name} data: $message")
                 // Emit the failure message.
                 fetchingStatusFlow.emit(NetworkResult.Failure(message = message))
                 lastFailedFetchedPokemon = pokemon
@@ -135,39 +139,61 @@ class PokedexRepository(
         )
     }
 
-    private suspend fun fetchSpecies(pokemon: Pokemon) {
-        speciesFlow.emit(NetworkResult.Empty())
-        getResult { apiService.getPokemonSpecies(pokemon.id.toString()) }.suspendOnStateChanged(
-            onSuccess = { species -> speciesFlow.emit(NetworkResult.Success(data = species)) },
-            onLoading = { speciesFlow.emit(NetworkResult.Loading()) },
-            onFailure = { message -> speciesFlow.emit(NetworkResult.Failure(message = message)) }
-        )
-    }
-
-    private suspend fun fetchEvolutionChain() {
-        evolutionFlow.emit(NetworkResult.Empty())
-        speciesFlow.collect {
-            it.suspendOnStateChanged(
-                onSuccess = { species ->
-                    val id = species.evolutionChain.url.extractId
-                    getResult { apiService.getPokemonEvolutionChain(id) }.suspendOnStateChanged(
-                        onSuccess = { chain -> evolutionFlow.emit(NetworkResult.Success(data = chain)) },
-                        onLoading = { evolutionFlow.emit(NetworkResult.Loading()) },
-                        onFailure = { message -> evolutionFlow.emit(NetworkResult.Failure(message = message)) }
-                    )
-                },
-                onLoading = { evolutionFlow.emit(NetworkResult.Loading()) },
-                onFailure = { message -> evolutionFlow.emit(NetworkResult.Failure(message = message)) })
-        }
-    }
-
     /**
      * Re-fetches the Pokemon if internet is available.
      */
     suspend fun refetchPokemon(context: Context) {
         if (context.isOnline) {
-            lastFailedFetchedPokemon?.let { fetchPokemon(it) }
+            lastFailedFetchedPokemon?.let { pokemon ->
+                Timber.d("Re-fetching Pokemon ${pokemon.name}")
+                fetchPokemon(pokemon)
+            }
         } else Timber.e("No internet. Not re-fetching.")
+    }
+
+    private suspend fun fetchSpecies(pokemon: Pokemon) {
+        speciesFlow.emit(NetworkResult.Empty())
+        getResult { apiService.getPokemonSpecies(pokemon.id.toString()) }.suspendOnStateChanged(
+            onSuccess = { species ->
+                Timber.d("Successfully fetched ${pokemon.name} species")
+                speciesFlow.emit(NetworkResult.Success(data = species))
+            },
+            onLoading = {
+                Timber.d("Loading ${pokemon.name} species")
+                speciesFlow.emit(NetworkResult.Loading())
+            },
+            onFailure = { message ->
+                Timber.e("Failed fetching ${pokemon.name} species: $message")
+                speciesFlow.emit(NetworkResult.Failure(message = message))
+            }
+        )
+    }
+
+    private suspend fun fetchEvolutionChain() {
+        evolutionFlow.emit(NetworkResult.Empty())
+        // Get evolution url from species object when fetched.
+        speciesFlow.collect {
+            it.suspendOnStateChanged(
+                onSuccess = { species ->
+                    val id = species.evolutionChain.url.extractId
+                    getResult { apiService.getPokemonEvolutionChain(id) }.suspendOnStateChanged(
+                        onSuccess = { chain ->
+                            Timber.d("Fetching evolution chain")
+                            evolutionFlow.emit(NetworkResult.Success(data = chain))
+                        },
+                        onLoading = {
+                            Timber.d("Loading evolution chain")
+                            evolutionFlow.emit(NetworkResult.Loading())
+                        },
+                        onFailure = { message ->
+                            Timber.e("Failed fetching evolution chain: $message")
+                            evolutionFlow.emit(NetworkResult.Failure(message = message))
+                        }
+                    )
+                },
+                onLoading = { evolutionFlow.emit(NetworkResult.Loading()) },
+                onFailure = { message -> evolutionFlow.emit(NetworkResult.Failure(message = message)) })
+        }
     }
 
     /**

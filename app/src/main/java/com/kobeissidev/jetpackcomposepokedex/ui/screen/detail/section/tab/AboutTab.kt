@@ -150,7 +150,7 @@ private fun GenderRow(
                 horizontalArrangement = Arrangement.End
             ) {
                 Icon(
-                    modifier = Modifier.size(14.dp),
+                    modifier = Modifier.size(size = 14.dp),
                     imageVector = Icons.Filled.Male,
                     contentDescription = null,
                     tint = titleTextColor,
@@ -167,7 +167,7 @@ private fun GenderRow(
                 horizontalArrangement = Arrangement.End
             ) {
                 Icon(
-                    modifier = Modifier.size(14.dp),
+                    modifier = Modifier.size(size = 14.dp),
                     imageVector = Icons.Filled.Female,
                     contentDescription = null,
                     tint = titleTextColor

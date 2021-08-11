@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @ExperimentalPagingApi
@@ -89,6 +90,7 @@ class MainViewModel @Inject constructor(
      * Disposes all image requests on cleared.
      */
     override fun onCleared() {
+        Timber.d("ViewModel cleared")
         imageRequestList.forEach { disposable -> disposable.dispose() }
         imageRequestList.clear()
         viewModelScope.cancel()
@@ -111,6 +113,7 @@ class MainViewModel @Inject constructor(
      */
     fun onErrorRetry(lazyPokemonEntries: LazyPagingItems<Pokemon>) {
         viewModelScope.launch {
+            Timber.d("onErrorRetry")
             delay(1000)
             lazyPokemonEntries.retry()
             isError.emit(!getApplication<Application>().isOnline)

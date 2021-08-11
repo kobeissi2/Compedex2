@@ -92,15 +92,15 @@ private fun RowLayout(
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth(0.3f)
+                .fillMaxWidth(fraction = 0.3f)
                 .fillMaxHeight(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             CrossFadeImage(
                 modifier = Modifier
-                    .fillMaxWidth(0.75f)
-                    .size(100.dp),
+                    .fillMaxWidth(fraction = 0.75f)
+                    .size(size = 100.dp),
                 data = mappedEvolution.fromImageUrl,
                 alignment = Alignment.CenterHorizontally
             )
@@ -108,12 +108,12 @@ private fun RowLayout(
                 imageVector = Icons.Outlined.ArrowForward,
                 contentDescription = null,
                 tint = bodyTextColor,
-                modifier = Modifier.height(100.dp)
+                modifier = Modifier.height(height = 100.dp)
             )
         }
         Row(
             modifier = Modifier
-                .fillMaxWidth(0.5f)
+                .fillMaxWidth(fraction = 0.5f)
                 .fillMaxHeight(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
@@ -141,12 +141,12 @@ private fun RowLayout(
                 imageVector = Icons.Outlined.ArrowForward,
                 contentDescription = null,
                 tint = bodyTextColor,
-                modifier = Modifier.height(100.dp)
+                modifier = Modifier.height(height = 100.dp)
             )
             CrossFadeImage(
                 modifier = Modifier
-                    .fillMaxWidth(0.75f)
-                    .size(100.dp),
+                    .fillMaxWidth(fraction = .75f)
+                    .size(size = 100.dp),
                 data = mappedEvolution.toImageUrl,
                 alignment = Alignment.CenterHorizontally
             )

@@ -10,9 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.ExperimentalPagingApi
 import coil.annotation.ExperimentalCoilApi
@@ -63,7 +61,7 @@ internal fun InfoCard(
         Card(
             modifier = Modifier
                 .fillMaxSize()
-                .clip(RoundedCornerShape(20.dp)),
+                .clip(RoundedCornerShape(size = 20.dp)),
             backgroundColor = palette.backgroundColor.asComposeColor,
         ) {
             InfoTabLayout(
