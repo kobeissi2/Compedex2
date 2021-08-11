@@ -7,5 +7,6 @@
     ":disableRateLimiting",
     ":label(<renovate>)",
     "group:all"
-  ]
+  ],
+  "ignoreDeps": ["com.android.tools.build:gradle"]
 }
