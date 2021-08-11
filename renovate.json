@@ -1,14 +1,6 @@
 {
   "extends": [
-    "config:base"
-  ],
-  "gradle": {
-    "enabled": false
-  },
-  "gradle-lite": {
-    "enabled": true
-  },
-  "reviewers": [
-    "kobeissi2"
+    "config:base",
+    ":enableGradleLite"
   ]
 }
