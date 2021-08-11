@@ -1,3 +1,6 @@
 {
-  "extends": [":enableGradleLite"]
+  "extends": [
+    ":enableGradleLite"
+  ],
+  "includeForks": true
 }
