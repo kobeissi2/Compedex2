@@ -88,7 +88,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.4.0-alpha04")
     implementation("androidx.room:room-paging:2.4.0-alpha04")
     // Generates the type converters for room using annotations
-    implementation("io.github.kaustubhpatange:autobindings:1.1-beta03")
+    implementation("io.github.kaustubhpatange:autobindings:1.1-beta04")
     // Paging Compose
     implementation("androidx.paging:paging-compose:1.0.0-alpha12")
     // Swipe to Refresh
@@ -109,6 +109,6 @@ dependencies {
 
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
     kapt("androidx.room:room-compiler:2.4.0-alpha04")
-    kapt("io.github.kaustubhpatange:autobindings-compiler:1.1-beta03")
+    kapt("io.github.kaustubhpatange:autobindings-compiler:1.1-beta04")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
 }
