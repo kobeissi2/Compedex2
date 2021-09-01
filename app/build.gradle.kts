@@ -1,4 +1,4 @@
-val composeVersion = "1.1.0-alpha02"
+val composeVersion = "1.1.0-alpha03"
 
 plugins {
     id("com.android.application")
@@ -49,7 +49,7 @@ dependencies {
     api("androidx.room:room-runtime:2.4.0-alpha04")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.30")
-    implementation("androidx.core:core-ktx:1.7.0-alpha01")
+    implementation("androidx.core:core-ktx:1.7.0-alpha02")
     implementation("androidx.appcompat:appcompat:1.4.0-alpha03")
     // Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.38.1")
@@ -72,7 +72,7 @@ dependencies {
     // Accompanist to supplement Jetpack Compose
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.17.0")
     // Navigation in Compose
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha07")
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha08")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.17.0")
     // Used for image loading in Compose
     implementation("io.coil-kt:coil-compose:1.3.2")
