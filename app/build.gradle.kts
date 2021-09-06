@@ -70,10 +70,10 @@ dependencies {
     implementation("androidx.compose.material:material-icons-core:$composeVersion")
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
     // Accompanist to supplement Jetpack Compose
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.17.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.18.0")
     // Navigation in Compose
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha08")
-    implementation("com.google.accompanist:accompanist-navigation-animation:0.17.0")
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.18.0")
     // Used for image loading in Compose
     implementation("io.coil-kt:coil-compose:1.3.2")
     // Retrofit + Moshi
@@ -92,10 +92,10 @@ dependencies {
     // Paging Compose
     implementation("androidx.paging:paging-compose:1.0.0-alpha12")
     // Swipe to Refresh
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.17.0")
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.18.0")
     // Pager for creating tabbed layout
-    implementation("com.google.accompanist:accompanist-pager:0.17.0")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.17.0")
+    implementation("com.google.accompanist:accompanist-pager:0.18.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.18.0")
     // Color extraction from image
     implementation("androidx.palette:palette-ktx:1.0.0")
     // Logging
