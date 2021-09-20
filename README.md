@@ -58,6 +58,6 @@ Landscape:
  <ol>
     <li><strike>Inital load might take up to 30 seconds.</strike> Loading now takes ~3 seconds on average.</li>
     <li><strike>Loading screen progress bar might chug along randomly.</strike> Improved performance in latest updated.</li>
-    <li><strike>There are times where the LazyVerticalGrid + Pager combo jump to the second page and don't render the first page unless you scroll.</strike> Fixed in latest update.</li>
+    <li>There are times where the LazyVerticalGrid + Pager combo jump to the second page and don't render the first page unless you scroll.</li>
     <li>Some Pokemon information might be wrong or missing (Gen 8) but that is from the API. I did fix some of them but it required hardcoding.</li>
 </ol>

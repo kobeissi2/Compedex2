@@ -48,7 +48,7 @@ dependencies {
     // Temp workaround for hilt + room bug
     api("androidx.room:room-runtime:2.4.0-alpha04")
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.31")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.30")
     implementation("androidx.core:core-ktx:1.7.0-beta01")
     implementation("androidx.appcompat:appcompat:1.4.0-alpha03")
     // Dagger Hilt
