@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -19,7 +20,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.ExperimentalPagingApi
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.kobeissidev.jetpackcomposepokedex.R
@@ -112,8 +114,8 @@ private fun ErrorTitleText(modifier: Modifier = Modifier) {
 
 @Composable
 private fun PikachuImage(imageSize: Dp) {
-    Image(
-        painter = rememberImagePainter(data = R.drawable.ic_pikachu),
+    AsyncImage(
+        model = ImageRequest.Builder(LocalContext.current).data(R.drawable.ic_pikachu).build(),
         contentDescription = null,
         modifier = Modifier.size(imageSize)
     )

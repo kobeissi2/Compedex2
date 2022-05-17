@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -35,7 +36,7 @@ import kotlinx.coroutines.launch
 fun SearchLayout(
     navHostController: NavHostController,
     items: List<Pokemon>,
-    listState: LazyListState,
+    listState: LazyGridState,
     maxGridCells: Int,
     viewModel: MainViewModel = hiltViewModel()
 ) {

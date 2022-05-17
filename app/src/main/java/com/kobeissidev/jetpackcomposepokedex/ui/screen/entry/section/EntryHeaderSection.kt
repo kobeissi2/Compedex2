@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,7 +31,7 @@ import com.kobeissidev.jetpackcomposepokedex.ui.composable.SearchLayout
 internal fun EntryHeaderSection(
     navHostController: NavHostController,
     lazyPokemonEntries: LazyPagingItems<Pokemon>,
-    listState: LazyListState,
+    listState: LazyGridState,
     maxGridCells: Int
 ) {
     Row(
@@ -49,7 +50,7 @@ internal fun EntryHeaderSection(
         )
         SearchLayout(
             navHostController = navHostController,
-            items = lazyPokemonEntries.snapshot().items,
+            items = lazyPokemonEntries.itemSnapshotList.items,
             listState = listState,
             maxGridCells = maxGridCells
         )

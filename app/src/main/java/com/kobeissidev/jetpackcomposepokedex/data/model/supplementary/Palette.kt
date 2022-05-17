@@ -2,8 +2,6 @@ package com.kobeissidev.jetpackcomposepokedex.data.model.supplementary
 
 import android.os.Parcelable
 import com.kobeissidev.jetpackcomposepokedex.util.EmptyString
-import com.kpstv.bindings.AutoGenerateListConverter
-import com.kpstv.bindings.ConverterType
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
@@ -14,7 +12,6 @@ import kotlinx.parcelize.Parcelize
  * @param titleTextColor will contain the title text color extracted from the drawable using Palette.
  * @param bodyTextColor will contain the body text color extracted from the drawable using Palette
  */
-@AutoGenerateListConverter(using = ConverterType.MOSHI)
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Palette(

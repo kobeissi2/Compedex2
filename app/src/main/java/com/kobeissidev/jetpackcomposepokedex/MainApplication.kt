@@ -1,4 +1,3 @@
-
 package com.kobeissidev.jetpackcomposepokedex
 
 import android.app.Application

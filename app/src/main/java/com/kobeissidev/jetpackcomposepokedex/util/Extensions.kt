@@ -4,8 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.lazy.LazyGridScope
-import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
@@ -23,7 +22,7 @@ inline val <reified T> T.TAG get() = T::class.java.simpleName
 @ExperimentalFoundationApi
 inline fun <T : Any> LazyGridScope.items(
     lazyPagingItems: LazyPagingItems<T>,
-    crossinline itemContent: @Composable LazyItemScope.(value: T) -> Unit
+    crossinline itemContent: @Composable (value: T) -> Unit
 ) {
     items(lazyPagingItems.itemCount) { index ->
         lazyPagingItems[index]?.let { item -> itemContent(item) }

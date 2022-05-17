@@ -29,7 +29,7 @@ import com.kobeissidev.jetpackcomposepokedex.ui.composable.RoundedButton
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
 import com.kobeissidev.jetpackcomposepokedex.util.decimeterAsString
 import com.kobeissidev.jetpackcomposepokedex.util.hectogramAsString
-import com.kobeissidev.jetpackcomposepokedex.util.onStateChanged
+import com.kobeissidev.jetpackcomposepokedex.util.OnStateChanged
 import com.kobeissidev.jetpackcomposepokedex.util.removeDash
 import timber.log.Timber
 
@@ -53,7 +53,7 @@ internal fun AboutTab(
             .verticalScroll(state = scrollState),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        speciesState.onStateChanged(
+        speciesState.OnStateChanged(
             onSuccess = { species ->
                 val abilities = pokemon.abilities!!
 

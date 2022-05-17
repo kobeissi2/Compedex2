@@ -25,7 +25,7 @@ import com.kobeissidev.jetpackcomposepokedex.data.model.supplementary.Palette
 import com.kobeissidev.jetpackcomposepokedex.ui.composable.CrossFadeImage
 import com.kobeissidev.jetpackcomposepokedex.ui.composable.LoadingLayout
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
-import com.kobeissidev.jetpackcomposepokedex.util.onStateChanged
+import com.kobeissidev.jetpackcomposepokedex.util.OnStateChanged
 import timber.log.Timber
 
 @ExperimentalPagingApi
@@ -40,7 +40,7 @@ fun EvolutionTab(
     val bodyTextColor by remember { mutableStateOf(palette.bodyTextColor.asComposeColor) }
     val evolutionState by viewModel.evolutionFlow.collectAsState()
 
-    evolutionState.onStateChanged(
+    evolutionState.OnStateChanged(
         onSuccess = { evolution ->
             LazyColumn(
                 modifier = Modifier

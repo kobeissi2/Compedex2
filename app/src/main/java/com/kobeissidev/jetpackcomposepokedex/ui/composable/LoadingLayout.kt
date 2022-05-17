@@ -10,9 +10,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.ExperimentalPagingApi
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.kobeissidev.jetpackcomposepokedex.R
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
 
@@ -42,9 +44,9 @@ fun LoadingLayout(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Image(
+            AsyncImage(
                 modifier = Modifier.fillMaxSize(fraction = widthPercentage),
-                painter = rememberImagePainter(data = R.drawable.ic_pokeball),
+                model = ImageRequest.Builder(LocalContext.current).data(R.drawable.ic_pokeball).build(),
                 contentDescription = null
             )
         }

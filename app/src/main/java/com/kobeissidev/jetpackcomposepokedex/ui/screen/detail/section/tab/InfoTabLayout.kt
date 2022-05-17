@@ -25,12 +25,7 @@ fun InfoTabLayout(
     textColor: Color,
     vararg tabs: Pair<Tabs, @Composable () -> Unit>
 ) {
-    val pagerState = rememberPagerState(
-        pageCount = tabs.size,
-        initialOffscreenLimit = 2,
-        infiniteLoop = true,
-        initialPage = 0,
-    )
+    val pagerState = rememberPagerState(initialPage = 0)
     val tabIndex = pagerState.currentPage
     val coroutineScope = rememberCoroutineScope()
 
@@ -62,7 +57,8 @@ fun InfoTabLayout(
         }
         HorizontalPager(
             state = pagerState,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            count = tabs.size
         ) { index ->
             tabs[index].second()
         }

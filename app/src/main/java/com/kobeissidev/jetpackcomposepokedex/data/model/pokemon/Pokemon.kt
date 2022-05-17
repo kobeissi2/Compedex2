@@ -12,14 +12,11 @@ import com.kobeissidev.jetpackcomposepokedex.util.Dash
 import com.kobeissidev.jetpackcomposepokedex.util.imageUrl
 import com.kobeissidev.jetpackcomposepokedex.util.removeDash
 import com.kobeissidev.jetpackcomposepokedex.util.spriteUrl
-import com.kpstv.bindings.AutoGenerateConverter
-import com.kpstv.bindings.ConverterType
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "pokemon")
-@AutoGenerateConverter(using = ConverterType.MOSHI)
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Pokemon(

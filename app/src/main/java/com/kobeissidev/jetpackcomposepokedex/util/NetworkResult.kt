@@ -1,5 +1,6 @@
 package com.kobeissidev.jetpackcomposepokedex.util
 
+import androidx.compose.runtime.Composable
 import retrofit2.Response
 import timber.log.Timber
 
@@ -24,10 +25,11 @@ sealed class NetworkResult<T>(
  * @param onLoading is an optional function to execute when the state is loading.
  * @param onFailure is an optional function to execute when the state is a failure. The error message is passed back to the user.
  */
-inline fun <T> NetworkResult<out T>.onStateChanged(
-    crossinline onLoading: (() -> Unit) = {},
-    crossinline onFailure: ((String) -> Unit) = {},
-    crossinline onSuccess: ((T) -> Unit) = {}
+@Composable
+inline fun <T> NetworkResult<out T>.OnStateChanged(
+    crossinline onLoading: (@Composable () -> Unit) = {},
+    crossinline onFailure: (@Composable (String) -> Unit) = {},
+    crossinline onSuccess: (@Composable (T) -> Unit) = {}
 ) = when (this) {
     is NetworkResult.Success -> onSuccess(data!!)
     is NetworkResult.Loading -> onLoading()

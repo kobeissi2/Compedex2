@@ -20,7 +20,7 @@ import com.kobeissidev.jetpackcomposepokedex.data.model.supplementary.Palette
 import com.kobeissidev.jetpackcomposepokedex.ui.composable.LoadingLayout
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.detail.section.tab.*
-import com.kobeissidev.jetpackcomposepokedex.util.onStateChanged
+import com.kobeissidev.jetpackcomposepokedex.util.OnStateChanged
 import timber.log.Timber
 
 @ExperimentalPagingApi
@@ -36,11 +36,11 @@ internal fun InfoCard(
     val evolutionResult by viewModel.evolutionFlow.collectAsState()
     // Add all tabs that are required.
     val tabs = mutableListOf<Pair<Tabs, @Composable () -> Unit>>().apply {
-        speciesResult.onStateChanged(onLoading = { LoadingLayout() }) {
+        speciesResult.OnStateChanged(onLoading = { LoadingLayout() }) {
             add(Tabs.About to { AboutTab(pokemon = pokemon, palette = palette) })
         }
         add(Tabs.BaseStats to { StatsTab(pokemon = pokemon, palette = palette) })
-        evolutionResult.onStateChanged(
+        evolutionResult.OnStateChanged(
             onLoading = { LoadingLayout() },
             onFailure = { Timber.e(it) }
         ) { evolution ->

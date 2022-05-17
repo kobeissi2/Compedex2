@@ -1,4 +1,4 @@
-val composeVersion = "1.1.0-alpha04"
+val composeVersion = "1.2.0-beta01"
 
 plugins {
     id("com.android.application")
@@ -6,6 +6,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp").version("1.6.21-1.0.5")
 }
 
 android.run {
@@ -20,7 +21,7 @@ android.run {
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
         javaCompileOptions.annotationProcessorOptions.arguments.putAll(
             mapOf(
-                "room.schemaLocation" to "$projectDir/schemas",
+                "room.exportSchema" to "false",
                 "room.incremental" to "true",
                 "room.expandProjection" to "true"
             )
@@ -35,33 +36,33 @@ android.run {
     }
 
     compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_1_8)
-        targetCompatibility(JavaVersion.VERSION_1_8)
+        sourceCompatibility(JavaVersion.VERSION_11)
+        targetCompatibility(JavaVersion.VERSION_11)
     }
 
     composeOptions.kotlinCompilerExtensionVersion = composeVersion
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
     buildFeatures.compose = true
 }
 
 dependencies {
     // Temp workaround for hilt + room bug
-    api("androidx.room:room-runtime:2.4.0-alpha04")
+    api("androidx.room:room-runtime:2.5.0-alpha01")
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.30")
-    implementation("androidx.core:core-ktx:1.7.0-beta01")
-    implementation("androidx.appcompat:appcompat:1.4.0-alpha03")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.21")
+    implementation("androidx.core:core-ktx:1.9.0-alpha03")
+    implementation("androidx.appcompat:appcompat:1.6.0-alpha03")
     // Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.38.1")
     // Used for hiltViewModel() in Compose
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     // Jetpack Compose
     implementation("androidx.compose.ui:ui:$composeVersion")
     // Tooling support (Previews, etc.)
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation("androidx.compose.runtime:runtime:$composeVersion")
     // implementations support for setContent in activities
-    implementation("androidx.activity:activity-compose:1.3.1")
+    implementation("androidx.activity:activity-compose:1.4.0")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation("androidx.compose.foundation:foundation:$composeVersion")
     // Material Design
@@ -70,32 +71,30 @@ dependencies {
     implementation("androidx.compose.material:material-icons-core:$composeVersion")
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
     // Accompanist to supplement Jetpack Compose
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.18.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.8-beta")
     // Navigation in Compose
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha09")
-    implementation("com.google.accompanist:accompanist-navigation-animation:0.18.0")
+    implementation("androidx.navigation:navigation-compose:2.5.0-rc01")
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.24.8-beta")
     // Used for image loading in Compose
-    implementation("io.coil-kt:coil-compose:1.3.2")
+    implementation("io.coil-kt:coil-compose:2.0.0")
     // Retrofit + Moshi
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
-    implementation("com.squareup.moshi:moshi:1.12.0")
+    implementation("com.squareup.moshi:moshi:1.13.0")
     // Kotlinx Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
     // Room
-    implementation("androidx.room:room-ktx:2.4.0-alpha04")
-    implementation("androidx.room:room-paging:2.4.0-alpha04")
-    // Generates the type converters for room using annotations
-    implementation("io.github.kaustubhpatange:autobindings:1.1-beta04")
+    implementation("androidx.room:room-ktx:2.5.0-alpha01")
+    implementation("androidx.room:room-paging:2.5.0-alpha01")
     // Paging Compose
-    implementation("androidx.paging:paging-compose:1.0.0-alpha12")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha14")
     // Swipe to Refresh
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.18.0")
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.24.8-beta")
     // Pager for creating tabbed layout
-    implementation("com.google.accompanist:accompanist-pager:0.18.0")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.18.0")
+    implementation("com.google.accompanist:accompanist-pager:0.24.8-beta")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.24.8-beta")
     // Color extraction from image
     implementation("androidx.palette:palette-ktx:1.0.0")
     // Logging
@@ -108,7 +107,6 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
 
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
-    kapt("androidx.room:room-compiler:2.4.0-alpha04")
-    kapt("io.github.kaustubhpatange:autobindings-compiler:1.1-beta05")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+    ksp("androidx.room:room-compiler:2.5.0-alpha01")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
 }

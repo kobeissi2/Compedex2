@@ -1,6 +1,5 @@
 package com.kobeissidev.jetpackcomposepokedex.ui.composable
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
@@ -9,9 +8,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.kobeissidev.jetpackcomposepokedex.R
 import com.kobeissidev.jetpackcomposepokedex.util.CrossFadeDurationInMillis
 
@@ -30,17 +31,13 @@ fun CrossFadeImage(
     textColor: Color? = null,
     alignment: Alignment.Horizontal = Alignment.Start
 ) {
-    val painter = rememberImagePainter(
-        data = data,
-        builder = {
-            crossfade(durationMillis = CrossFadeDurationInMillis)
-            placeholder(drawableResId = R.drawable.ic_pokeball)
-        }
-    )
-
     Column(horizontalAlignment = alignment) {
-        Image(
-            painter = painter,
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(data = data)
+                .crossfade(durationMillis = CrossFadeDurationInMillis)
+                .placeholder(drawableResId = R.drawable.ic_pokeball)
+                .build(),
             contentDescription = null,
             colorFilter = tintColor?.let { ColorFilter.tint(color = it) },
             modifier = modifier.fillMaxWidth()

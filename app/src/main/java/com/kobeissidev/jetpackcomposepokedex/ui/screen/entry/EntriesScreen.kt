@@ -41,9 +41,10 @@ fun EntriesScreen(
     val lazyPokemonEntries = viewModel.pokemonPagingFlow.collectAsLazyPagingItems()
     val errorState by viewModel.isError.collectAsState()
     val isListEmpty = lazyPokemonEntries.itemCount == 0
-    val isLoading = lazyPokemonEntries.loadState.refresh is LoadState.Loading
     val isError = (lazyPokemonEntries.loadState.refresh is LoadState.Error || errorState) && isListEmpty
     var isReady by remember { mutableStateOf(false) }
+    val isLoading = lazyPokemonEntries.loadState.refresh is LoadState.Loading ||
+            (lazyPokemonEntries.loadState.refresh is LoadState.NotLoading && !isReady)
 
     // Prevents LazyPagingItems from loading in too quickly which randomly triggers the first page not to load properly.
     LaunchedEffect(key1 = isError) {
@@ -56,8 +57,8 @@ fun EntriesScreen(
             .fillMaxSize()
             .padding(all = 16.dp)
     ) {
-        if (isLoading || isError) {
-            LoadingLayout(isShowImage = isListEmpty && !isError)
+        if (isLoading || isError || !isReady) {
+            LoadingLayout(isShowImage = (isListEmpty && !isError) || !isReady)
         }
         when {
             isListEmpty && isError -> {

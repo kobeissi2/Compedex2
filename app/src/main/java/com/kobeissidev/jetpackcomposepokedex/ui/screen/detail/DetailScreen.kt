@@ -18,7 +18,7 @@ import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.detail.section.ArtworkSection
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.detail.section.DetailHeaderSection
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.detail.section.InfoCard
-import com.kobeissidev.jetpackcomposepokedex.util.onStateChanged
+import com.kobeissidev.jetpackcomposepokedex.util.OnStateChanged
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import timber.log.Timber
 
@@ -35,13 +35,13 @@ fun DetailScreen(viewModel: MainViewModel = hiltViewModel()) {
     val speciesState by viewModel.speciesFlow.collectAsState()
     val orientation by viewModel.orientationFlow.collectAsState(initial = viewModel.currentOrientation)
 
-    pokemonState.onStateChanged(
+    pokemonState.OnStateChanged(
         onLoading = { LoadingLayout(isShowImage = true) },
         onFailure = { ErrorLayout(onRefresh = { viewModel.refetchPokemon() }) }
     ) { pokemon ->
         val palette by remember { mutableStateOf(pokemon.shuffledPalette) }
 
-        speciesState.onStateChanged(
+        speciesState.OnStateChanged(
             onLoading = { LoadingLayout(isShowImage = true) },
             onFailure = { Timber.e(it) }
         ) {

@@ -1,8 +1,6 @@
 package com.kobeissidev.jetpackcomposepokedex.data.model.supplementary
 
 import android.os.Parcelable
-import com.kpstv.bindings.AutoGenerateConverter
-import com.kpstv.bindings.ConverterType
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 import androidx.compose.ui.graphics.Color as ComposeColor
@@ -10,7 +8,6 @@ import androidx.compose.ui.graphics.Color as ComposeColor
 /***
  * Wrapper for Color class as Moshi doesn't like Platform classes without custom adapters.
  */
-@AutoGenerateConverter(using = ConverterType.MOSHI)
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Color(

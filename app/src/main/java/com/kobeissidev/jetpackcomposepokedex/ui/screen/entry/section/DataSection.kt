@@ -6,9 +6,11 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
@@ -19,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -50,8 +53,8 @@ internal fun DataSection(
     navHostController: NavHostController,
     lazyPokemonEntries: LazyPagingItems<Pokemon>,
     viewModel: MainViewModel = hiltViewModel(),
-    listState: LazyListState = rememberLazyListState(),
-    isError: Boolean = lazyPokemonEntries.loadState.refresh is Error
+    listState: LazyGridState = rememberLazyGridState(),
+    isError: Boolean = lazyPokemonEntries.loadState.refresh is LoadState.Error
 ) {
     val isRefreshing by viewModel.isRefreshing.collectAsState()
     val orientation by viewModel.orientationFlow.collectAsState(initial = viewModel.currentOrientation)
@@ -78,7 +81,7 @@ internal fun DataSection(
                 maxGridCells = maxGridCells
             )
             LazyVerticalGrid(
-                cells = GridCells.Fixed(count = maxGridCells),
+                columns = GridCells.Fixed(count = maxGridCells),
                 state = listState,
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(all = 8.dp),
