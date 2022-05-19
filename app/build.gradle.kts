@@ -1,4 +1,4 @@
-val composeVersion = "1.2.0-beta01"
+val composeVersion = "1.2.0-beta02"
 
 plugins {
     id("com.android.application")
@@ -7,6 +7,9 @@ plugins {
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp").version("1.6.21-1.0.5")
+}
+android {
+    namespace = "com.kobeissidev.jetpackcomposepokedex"
 }
 
 android.run {
@@ -50,8 +53,8 @@ dependencies {
     api("androidx.room:room-runtime:2.5.0-alpha01")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.21")
-    implementation("androidx.core:core-ktx:1.9.0-alpha03")
-    implementation("androidx.appcompat:appcompat:1.6.0-alpha03")
+    implementation("androidx.core:core-ktx:1.9.0-alpha04")
+    implementation("androidx.appcompat:appcompat:1.6.0-alpha04")
     // Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.38.1")
     // Used for hiltViewModel() in Compose

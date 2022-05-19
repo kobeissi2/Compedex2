@@ -1,7 +1,6 @@
 package com.kobeissidev.jetpackcomposepokedex.ui.composable
 
 import android.content.res.Configuration
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme

@@ -12,6 +12,7 @@ import com.kobeissidev.jetpackcomposepokedex.data.model.remotekey.RemoteKey
 import com.kobeissidev.jetpackcomposepokedex.data.remote.PokeApiService
 import com.kobeissidev.jetpackcomposepokedex.util.getResult
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
@@ -61,12 +62,6 @@ class PokemonRemoteMediator(
                 val isEndOfList = response.next.isNullOrBlank()
                 // Update the database with the response.
                 database.withTransaction {
-                    // If a refresh is triggered, clear all data so we can get new data.
-                    if (loadType == LoadType.REFRESH) {
-                        database.pokedexDao().deleteAllPokemonEntries()
-                        database.pokedexDao().deleteAllPokemon()
-                        database.pokedexDao().deleteAllRemoteKeys()
-                    }
                     // Create a remote key and keep track of the previous and next key.
                     val prevKey = if (page == StartingPageIndex) null else page - 1
                     val nextKey = if (isEndOfList) null else page + 1
@@ -75,7 +70,8 @@ class PokemonRemoteMediator(
                     database.pokedexDao().insertAllRemoteKeys(keys)
                     database.pokedexDao().insertAllPokemonEntries(response)
                 }
-                Timber.d("Remote mediator exception successfull")
+                Timber.d("Remote mediator exception successful")
+                delay(500)
                 MediatorResult.Success(endOfPaginationReached = isEndOfList)
             }
         } catch (exception: Exception) {

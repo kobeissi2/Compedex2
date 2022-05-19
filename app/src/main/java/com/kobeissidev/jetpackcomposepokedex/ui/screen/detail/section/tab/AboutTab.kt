@@ -27,9 +27,9 @@ import com.kobeissidev.jetpackcomposepokedex.ui.composable.InfoRow
 import com.kobeissidev.jetpackcomposepokedex.ui.composable.LoadingLayout
 import com.kobeissidev.jetpackcomposepokedex.ui.composable.RoundedButton
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
+import com.kobeissidev.jetpackcomposepokedex.util.OnStateChanged
 import com.kobeissidev.jetpackcomposepokedex.util.decimeterAsString
 import com.kobeissidev.jetpackcomposepokedex.util.hectogramAsString
-import com.kobeissidev.jetpackcomposepokedex.util.OnStateChanged
 import com.kobeissidev.jetpackcomposepokedex.util.removeDash
 import timber.log.Timber
 

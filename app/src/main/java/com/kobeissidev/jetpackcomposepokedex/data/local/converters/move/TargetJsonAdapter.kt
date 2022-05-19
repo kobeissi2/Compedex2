@@ -5,21 +5,15 @@
 
 package com.kobeissidev.jetpackcomposepokedex.data.local.converters.move
 
+import com.kobeissidev.jetpackcomposepokedex.data.model.move.Target
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.`internal`.Util
-import java.lang.NullPointerException
+import com.squareup.moshi.internal.Util
 import java.lang.reflect.Constructor
 import kotlin.Int
 import kotlin.String
-import kotlin.Suppress
-import kotlin.Unit
-import kotlin.collections.emptySet
-import kotlin.jvm.Volatile
-import kotlin.text.buildString
-import com.kobeissidev.jetpackcomposepokedex.data.model.move.Target
 
 public class TargetJsonAdapter(
   moshi: Moshi

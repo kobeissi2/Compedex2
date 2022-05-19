@@ -1,9 +1,9 @@
 package com.kobeissidev.jetpackcomposepokedex.data.model.evolution
 
-import com.squareup.moshi.JsonClass
-import com.squareup.moshi.Json
-import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
 @Parcelize

@@ -1,14 +1,17 @@
-package com.kobeissidev.jetpackcomposepokedex.data.local.converters.pokemon;;
+package com.kobeissidev.jetpackcomposepokedex.data.local.converters.pokemon;
 
 import androidx.room.TypeConverter;
 
 import com.kobeissidev.jetpackcomposepokedex.data.model.pokemon.Type;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
-import java.io.IOException;
-import java.lang.String;
-import java.util.List;
+
 import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
+import java.util.List;
+
+;
 
 public class TypeListConverter {
   @TypeConverter

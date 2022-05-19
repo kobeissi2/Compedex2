@@ -25,7 +25,7 @@ inline fun <T : Any> LazyGridScope.items(
     crossinline itemContent: @Composable (value: T) -> Unit
 ) {
     items(lazyPagingItems.itemCount) { index ->
-        lazyPagingItems[index]?.let { item -> itemContent(item) }
+        lazyPagingItems.peek(index)?.let { item -> itemContent(item) }
     }
 }
 

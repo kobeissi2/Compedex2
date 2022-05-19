@@ -4,9 +4,10 @@ import androidx.room.TypeConverter;
 
 import com.kobeissidev.jetpackcomposepokedex.data.model.entry.PokemonEntry;
 import com.squareup.moshi.Moshi;
-import java.io.IOException;
-import java.lang.String;
+
 import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
 
 public class PokemonEntryConverter {
   @TypeConverter

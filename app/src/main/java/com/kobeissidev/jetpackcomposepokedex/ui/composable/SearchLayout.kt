@@ -5,13 +5,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.capitalize
@@ -61,13 +60,13 @@ fun SearchLayout(
         }
     ) {
         var value by remember { mutableStateOf(EmptyString) }
-        val view = LocalView.current
+        val focusManager = LocalFocusManager.current
 
         onItemSelected { pokemon ->
             viewModel.fetchPokemon(pokemon)
             value = pokemon.name
             filter(value)
-            view.clearFocus()
+            focusManager.clearFocus()
             coroutineScope.launch {
                 listState.scrollToItem((pokemon.id - 1) / maxGridCells)
                 navHostController.navigate(NavigationScreens.PokemonDetails.route)
@@ -77,11 +76,11 @@ fun SearchLayout(
             modifier = Modifier.testTag(TAG),
             value = value,
             label = stringResource(id = R.string.search_label),
-            onDoneActionClick = { view.clearFocus() },
+            onDoneActionClick = { focusManager.clearFocus() },
             onClearClick = {
                 value = ""
                 filter(value)
-                view.clearFocus()
+                focusManager.clearFocus()
             },
             onFocusChanged = { focusState ->
                 isSearching = focusState.isFocused

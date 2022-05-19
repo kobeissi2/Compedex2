@@ -1,12 +1,15 @@
-package com.kobeissidev.jetpackcomposepokedex.data.local.converters.pokemon;;
+package com.kobeissidev.jetpackcomposepokedex.data.local.converters.pokemon;
 
 import androidx.room.TypeConverter;
 
 import com.kobeissidev.jetpackcomposepokedex.data.model.pokemon.XY;
 import com.squareup.moshi.Moshi;
-import java.io.IOException;
-import java.lang.String;
+
 import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
+
+;
 
 public class XYConverter {
   @TypeConverter
