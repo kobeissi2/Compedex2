@@ -47,7 +47,6 @@ import com.kobeissidev.jetpackcomposepokedex.util.items
 @ExperimentalAnimationApi
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
-@ExperimentalFoundationApi
 @Composable
 internal fun DataSection(
     navHostController: NavHostController,

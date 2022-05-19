@@ -3,7 +3,6 @@ package com.kobeissidev.jetpackcomposepokedex.util
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.capitalize
@@ -19,7 +18,6 @@ inline val <reified T> T.TAG get() = T::class.java.simpleName
  * Allows the usage of lazyPagingItems as an item for a LazyVerticalGrid.
  * @param lazyPagingItems contains the data collected.
  */
-@ExperimentalFoundationApi
 inline fun <T : Any> LazyGridScope.items(
     lazyPagingItems: LazyPagingItems<T>,
     crossinline itemContent: @Composable (value: T) -> Unit
@@ -34,8 +32,7 @@ inline fun <T : Any> LazyGridScope.items(
  */
 val Context.isOnline: Boolean
     get() {
-        val connectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.let {
             when {
                 it.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true

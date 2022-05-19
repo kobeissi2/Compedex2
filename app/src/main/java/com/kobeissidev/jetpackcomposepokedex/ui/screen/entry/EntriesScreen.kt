@@ -1,7 +1,6 @@
 package com.kobeissidev.jetpackcomposepokedex.ui.screen.entry
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -31,7 +30,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalAnimationApi
 @ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
-@ExperimentalFoundationApi
 @ExperimentalCoilApi
 @ExperimentalPagingApi
 @Composable

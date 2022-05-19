@@ -1,7 +1,6 @@
 package com.kobeissidev.jetpackcomposepokedex.ui.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.paging.ExperimentalPagingApi
@@ -23,7 +22,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @ExperimentalPagingApi
-@ExperimentalFoundationApi
 @Composable
 fun MainNavigationScreen() {
     // Remember this navController here so we can reuse the same instance among all screens.
