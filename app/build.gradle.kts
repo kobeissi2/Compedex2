@@ -56,7 +56,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0-alpha04")
     implementation("androidx.appcompat:appcompat:1.6.0-alpha04")
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.38.1")
+    implementation("com.google.dagger:hilt-android:2.42")
     // Used for hiltViewModel() in Compose
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     // Jetpack Compose
@@ -79,11 +79,11 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.5.0-rc01")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.24.8-beta")
     // Used for image loading in Compose
-    implementation("io.coil-kt:coil-compose:2.0.0")
+    implementation("io.coil-kt:coil-compose:2.1.0")
     // Retrofit + Moshi
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation("com.squareup.moshi:moshi:1.13.0")
     // Kotlinx Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
@@ -109,7 +109,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
 
-    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.42")
     ksp("androidx.room:room-compiler:2.5.0-alpha01")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
 }
