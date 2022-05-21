@@ -81,9 +81,7 @@ fun SearchLayout(
                 filter(value)
                 focusManager.clearFocus()
             },
-            onFocusChanged = { focusState ->
-                isSearching = focusState.isFocused
-            },
+            onFocusChanged = { focusState -> isSearching = focusState.isFocused },
             onValueChanged = { query ->
                 value = query
                 filter(value)

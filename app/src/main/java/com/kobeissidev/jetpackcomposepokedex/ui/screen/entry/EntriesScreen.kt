@@ -41,7 +41,7 @@ fun EntriesScreen(
     val errorState by viewModel.isError.collectAsState()
     val isListEmpty = lazyPokemonEntries.itemCount == 0
     val isError = (lazyPokemonEntries.loadState.refresh is LoadState.Error || errorState) && isListEmpty
-    val isLoading = lazyPokemonEntries.loadState.refresh !is LoadState.NotLoading || (isListEmpty && !isError)
+    val isLoading = lazyPokemonEntries.loadState.refresh is LoadState.Loading || (isListEmpty && !isError)
 
     Column(
         modifier = Modifier

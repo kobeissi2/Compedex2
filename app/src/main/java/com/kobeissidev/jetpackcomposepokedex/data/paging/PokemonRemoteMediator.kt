@@ -29,10 +29,11 @@ class PokemonRemoteMediator(
     /**
      * Update paginated content when this is initialized.
      */
-    override suspend fun initialize() = if (sharedPreferences.getBoolean(FirstLaunch, true)) {
+    //TODO: See if this should be removed
+/*    override suspend fun initialize() = if (sharedPreferences.getBoolean(FirstLaunch, true)) {
         sharedPreferences.edit().putBoolean(FirstLaunch, false).apply()
         InitializeAction.LAUNCH_INITIAL_REFRESH
-    } else InitializeAction.SKIP_INITIAL_REFRESH
+    } else InitializeAction.SKIP_INITIAL_REFRESH*/
 
     /**
      * Load the data

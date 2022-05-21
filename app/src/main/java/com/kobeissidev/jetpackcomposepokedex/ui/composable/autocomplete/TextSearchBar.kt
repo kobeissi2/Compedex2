@@ -6,7 +6,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
@@ -31,22 +32,37 @@ fun TextSearchBar(
     onFocusChanged: (FocusState) -> Unit = {},
     onValueChanged: (String) -> Unit
 ) {
+    var isFocused by remember { mutableStateOf(false) }
+
     OutlinedTextField(
         modifier = modifier
             .fillMaxWidth(.9f)
-            .onFocusChanged { onFocusChanged(it) },
+            .onFocusChanged { focusState ->
+                isFocused = focusState.isFocused
+                onFocusChanged(focusState)
+            },
         value = value.capitalize(Locale.current),
         onValueChange = { query -> onValueChanged(query) },
         label = { AutoSizeText(text = label.capitalize(Locale.current)) },
         textStyle = MaterialTheme.typography.subtitle1,
         singleLine = true,
         trailingIcon = {
-            IconButton(onClick = { onClearClick() }) {
-                Icon(
-                    imageVector = Icons.Filled.Clear,
-                    contentDescription = "Clear",
-                    tint = MaterialTheme.colors.onPrimary
-                )
+            if (value.isNotBlank() || isFocused) {
+                IconButton(onClick = { onClearClick() }) {
+                    Icon(
+                        imageVector = Icons.Filled.Clear,
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.onPrimary
+                    )
+                }
+            } else {
+                IconButton(onClick = { }) {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.onPrimary
+                    )
+                }
             }
         },
         keyboardActions = KeyboardActions(onDone = { onDoneActionClick() }),

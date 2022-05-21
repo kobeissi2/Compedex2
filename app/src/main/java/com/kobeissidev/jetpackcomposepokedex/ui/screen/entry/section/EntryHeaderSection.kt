@@ -1,10 +1,8 @@
 package com.kobeissidev.jetpackcomposepokedex.ui.screen.entry.section
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -43,14 +41,19 @@ internal fun EntryHeaderSection(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        AutoSizeText(
-            text = stringResource(id = R.string.app_name),
-            style = MaterialTheme.typography.h5.copy(
-                fontWeight = FontWeight.ExtraBold,
-                color = MaterialTheme.colors.onPrimary
-            ),
-            onClick = { coroutineScope.launch { listState.scrollToItem(0) } }
-        )
+        Box(
+            modifier = Modifier.clickable {
+                coroutineScope.launch { listState.scrollToItem(0) }
+            }
+        ) {
+            AutoSizeText(
+                text = stringResource(id = R.string.app_name),
+                style = MaterialTheme.typography.h5.copy(
+                    fontWeight = FontWeight.ExtraBold,
+                    color = MaterialTheme.colors.onPrimary
+                ),
+            )
+        }
         SearchLayout(
             coroutineScope = coroutineScope,
             navHostController = navHostController,
