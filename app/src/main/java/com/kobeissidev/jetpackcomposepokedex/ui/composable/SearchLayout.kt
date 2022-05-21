@@ -27,20 +27,19 @@ import com.kobeissidev.jetpackcomposepokedex.ui.navigation.NavigationScreens
 import com.kobeissidev.jetpackcomposepokedex.ui.screen.MainViewModel
 import com.kobeissidev.jetpackcomposepokedex.util.EmptyString
 import com.kobeissidev.jetpackcomposepokedex.util.TAG
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @ExperimentalPagingApi
 @ExperimentalAnimationApi
 @Composable
 fun SearchLayout(
+    coroutineScope: CoroutineScope,
     navHostController: NavHostController,
     items: List<Pokemon>,
     listState: LazyGridState,
-    maxGridCells: Int,
     viewModel: MainViewModel = hiltViewModel()
 ) {
-    val coroutineScope = rememberCoroutineScope()
-
     AutoCompleteBox(
         items = items,
         itemContent = { pokemon ->

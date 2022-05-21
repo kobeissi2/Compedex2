@@ -76,8 +76,7 @@ internal fun DataSection(
             EntryHeaderSection(
                 navHostController = navHostController,
                 lazyPokemonEntries = lazyPokemonEntries,
-                listState = listState,
-                maxGridCells = maxGridCells
+                listState = listState
             )
             LazyVerticalGrid(
                 columns = GridCells.Fixed(count = maxGridCells),

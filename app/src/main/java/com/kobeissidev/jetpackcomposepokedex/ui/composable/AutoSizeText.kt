@@ -1,5 +1,6 @@
 package com.kobeissidev.jetpackcomposepokedex.ui.composable
 
+import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -13,7 +14,8 @@ fun AutoSizeText(
     modifier: Modifier = Modifier,
     style: TextStyle = TextStyle.Default,
     maxLines: Int = 1,
-    overflow :TextOverflow = TextOverflow.Ellipsis
+    overflow: TextOverflow = TextOverflow.Ellipsis,
+    onClick: () -> Unit = {}
 ) {
     var scaledTextStyle by remember { mutableStateOf(style) }
     var readyToDraw by remember { mutableStateOf(false) }
@@ -21,11 +23,9 @@ fun AutoSizeText(
     text?.let {
         Text(
             text,
-            modifier.drawWithContent {
-                if (readyToDraw) {
-                    drawContent()
-                }
-            },
+            modifier
+                .drawWithContent { if (readyToDraw) drawContent() }
+                .clickable { onClick() },
             style = scaledTextStyle,
             softWrap = false,
             maxLines = maxLines,

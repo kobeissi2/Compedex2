@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,6 +21,7 @@ import com.kobeissidev.jetpackcomposepokedex.R
 import com.kobeissidev.jetpackcomposepokedex.data.model.pokemon.Pokemon
 import com.kobeissidev.jetpackcomposepokedex.ui.composable.AutoSizeText
 import com.kobeissidev.jetpackcomposepokedex.ui.composable.SearchLayout
+import kotlinx.coroutines.launch
 
 /**
  * Header for the entry screen which contains the title and the search bar.
@@ -30,9 +32,10 @@ import com.kobeissidev.jetpackcomposepokedex.ui.composable.SearchLayout
 internal fun EntryHeaderSection(
     navHostController: NavHostController,
     lazyPokemonEntries: LazyPagingItems<Pokemon>,
-    listState: LazyGridState,
-    maxGridCells: Int
+    listState: LazyGridState
 ) {
+    val coroutineScope = rememberCoroutineScope()
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,13 +48,14 @@ internal fun EntryHeaderSection(
             style = MaterialTheme.typography.h5.copy(
                 fontWeight = FontWeight.ExtraBold,
                 color = MaterialTheme.colors.onPrimary
-            )
+            ),
+            onClick = { coroutineScope.launch { listState.scrollToItem(0) } }
         )
         SearchLayout(
+            coroutineScope = coroutineScope,
             navHostController = navHostController,
             items = lazyPokemonEntries.itemSnapshotList.items,
-            listState = listState,
-            maxGridCells = maxGridCells
+            listState = listState
         )
     }
 }
