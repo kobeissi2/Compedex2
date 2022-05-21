@@ -68,7 +68,7 @@ fun SearchLayout(
             filter(value)
             focusManager.clearFocus()
             coroutineScope.launch {
-                listState.scrollToItem((pokemon.id - 1) / maxGridCells)
+                listState.scrollToItem(pokemon.id - 1)
                 navHostController.navigate(NavigationScreens.PokemonDetails.route)
             }
         }
