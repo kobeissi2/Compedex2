@@ -1,7 +1,9 @@
 # JetpackComposePokedex is now Compédex
+
 A little bit more complete Jetpack Compose to help me improve in learning it.
 
 ## Features:
+
 <ul>
   <li>Fetches all of the Pokemon contained in PokeAPI.</li>
   <li>Extracts color palettes from the sprite and uses that to randomly generate a background and a matching text color.</li>
@@ -10,6 +12,7 @@ A little bit more complete Jetpack Compose to help me improve in learning it.
 </ul>
 
 ### Primary Technologies/Libraries Used:
+
 <ol>
   <li>Kotlin</li>
    <ul>
@@ -48,6 +51,7 @@ Portrait:
 </p>
 
 Landscape:
+
 <p>
   <img src="https://github.com/kobeissi2/Compedex/blob/main/screenshots/EntriesLandscape.png" width="500" title="Entries"/>
   <img src="https://github.com/kobeissi2/Compedex/blob/main/screenshots/DetailsLandscape.png" width="500" title="Details"/>
@@ -55,9 +59,11 @@ Landscape:
 </p>
 
 #### Known Bugs/Issues:
+
  <ol>
-    <li><strike>Inital load might take up to 30 seconds.</strike> Loading now takes ~3 seconds on average.</li>
-    <li><strike>Loading screen progress bar might chug along randomly.</strike> Improved performance in latest updated.</li>
     <li>There are times where the LazyVerticalGrid + Pager combo jump to the second page and don't render the first page unless you scroll.</li>
+      <ol>
+        <li>Attempting to fix this currently</li>
+      </ol>
     <li>Some Pokemon information might be wrong or missing (Gen 8) but that is from the API. I did fix some of them but it required hardcoding.</li>
 </ol>
