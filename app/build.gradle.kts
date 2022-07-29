@@ -1,4 +1,4 @@
-val composeVersion = "1.2.0-rc03"
+val composeVersion = "1.2.0"
 
 plugins {
     id("com.android.application")
@@ -56,7 +56,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0-alpha05")
     implementation("androidx.appcompat:appcompat:1.6.0-alpha05")
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.43")
+    implementation("com.google.dagger:hilt-android:2.43.1")
     // Used for hiltViewModel() in Compose
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     // Jetpack Compose
@@ -65,7 +65,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation("androidx.compose.runtime:runtime:$composeVersion")
     // implementations support for setContent in activities
-    implementation("androidx.activity:activity-compose:1.5.0")
+    implementation("androidx.activity:activity-compose:1.5.1")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation("androidx.compose.foundation:foundation:$composeVersion")
     // Material Design
@@ -74,10 +74,10 @@ dependencies {
     implementation("androidx.compose.material:material-icons-core:$composeVersion")
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
     // Accompanist to supplement Jetpack Compose
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.24.8-beta")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.25.0")
     // Navigation in Compose
-    implementation("androidx.navigation:navigation-compose:2.5.0")
-    implementation("com.google.accompanist:accompanist-navigation-animation:0.24.8-beta")
+    implementation("androidx.navigation:navigation-compose:2.5.1")
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.25.0")
     // Used for image loading in Compose
     implementation("io.coil-kt:coil-compose:2.1.0")
     // Retrofit + Moshi
@@ -94,10 +94,10 @@ dependencies {
     // Paging Compose
     implementation("androidx.paging:paging-compose:1.0.0-alpha15")
     // Swipe to Refresh
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.24.8-beta")
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.25.0")
     // Pager for creating tabbed layout
-    implementation("com.google.accompanist:accompanist-pager:0.24.8-beta")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.24.8-beta")
+    implementation("com.google.accompanist:accompanist-pager:0.25.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.25.0")
     // Color extraction from image
     implementation("androidx.palette:palette-ktx:1.0.0")
     // Logging
@@ -109,7 +109,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
 
-    kapt("com.google.dagger:hilt-android-compiler:2.43")
+    kapt("com.google.dagger:hilt-android-compiler:2.43.1")
     ksp("androidx.room:room-compiler:2.5.0-alpha02")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
 }
